@@ -1,13 +1,19 @@
-<nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Angular springBoot Application</a>
-  <div class="navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/users">Users</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/roles">Roles</a>
-      </li>
-    </ul>
-  </div></nav>
-<router-outlet></router-outlet>
+<div class="main-container d-flex">
+  <!-- Side bar hidden initially -->
+  <div class="side-nav">
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>Try scrolling the rest of the page to see this option in action.</p>
+      </div>
+    </div>
+  </div>
+  <div class="center-content">
+    <app-header></app-header>
+    <div class="container-fluid"><router-outlet></router-outlet></div>
+  </div>
+</div>
+

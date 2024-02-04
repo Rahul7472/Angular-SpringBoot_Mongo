@@ -1,0 +1,133 @@
+<div class="header-top d-flex">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div>
+      <a class="navbar-brand" href="#">
+        <fa-icon [icon]="faAlignLeft"></fa-icon>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Create
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Users</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#">Roles</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item" routerLinkActive="active">
+                <a class="dropdown-item nav-link" routerLink="/users">Users</a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="dropdown-item nav-link" routerLink="/roles">Roles</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div> -->
+    </div>
+  </nav>
+  <ul class="notification d-flex">
+    <li><fa-icon [icon]="faBell"></fa-icon></li>
+    <li><fa-icon [icon]="faExpand"></fa-icon></li>
+  </ul>
+
+  <!-- Profile image with dropdown -->
+  <div class="dropdown profile-link">
+    <a
+      class="dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <span><img src="../../../assets/images/avatar.png" alt=""></span>
+    </a>
+    <ul class="dropdown-menu profile-dropdown">
+      <div class="profile-details d-flex">
+        <div class="image"><img src="../../../assets/images/avatar.png" alt="" height="80px" width="80px"></div>
+        <h6 class="name">DIPTISUNDER</h6>
+        <small class="role">MANAGER</small>
+      </div>
+      <li><a class="dropdown-item" href="#">My Profile</a></li>
+      <li><a class="dropdown-item" href="#">Activity Logs</a></li>
+      <li><a class="dropdown-item" href="#">Account Settings</a></li>
+      <li><a class="dropdown-item" href="#">Sign Out</a></li>
+    </ul>
+  </div>
+  <!-- Profile image with dropdown end -->
+</div>
+<div class="breadcrumb-header">
+    <div class="row w-100 p-3">
+        <div class="col-md-8">
+            <h4 class="content-title">HI, WELCOME BACK</h4>
+        </div>
+        <div class="col-md-4 d-flex justify-content-around">
+            <div class="expenses d-flex">
+                <div class="figures me-3">
+                    <span style="display: block;">EXPENSES</span>
+                    <span>$53,000</span>
+                </div>
+                <fa-icon [icon]="faChartSimple"></fa-icon>
+            </div>
+            
+            <div class="profit d-flex">
+                <div class="figures me-3">
+                    <span style="display: block;">PROFIT</span>
+                    <span>$34,000</span>
+                </div>
+                <fa-icon [icon]="faChartSimple"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="nav nav-tabs" style="margin-top: 110px;">
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [ngClass]="{ active: userTabSelected }"
+      (click)="onTabSelection('users')"
+      >Users</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [ngClass]="{ active: !userTabSelected }"
+      (click)="onTabSelection('roles')"
+      >Roles</a
+    >
+  </li>
+</ul>

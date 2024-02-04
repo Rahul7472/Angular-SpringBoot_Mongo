@@ -1,0 +1,78 @@
+.header-top {
+    height: 65px;
+    padding: 0 30px;
+    align-items: center;
+    border-bottom: 1px solid #0072ba;
+    nav {
+        background-color: transparent !important;
+        * {
+            color: white;
+        }
+        
+    }
+    .notification {
+        li {
+            margin: 27px;
+        }
+        margin: 0 !important;
+        margin-left: auto !important;
+        list-style: none;
+        fa-icon {
+            font-size: 22px; 
+            color: white;
+        }
+    }
+    .profile-link {
+        .dropdown-toggle {
+            color: white;
+        }
+        span img {
+            height: 35px;
+            border-radius: 1000px;
+        }
+    }
+    .dropdown-menu {
+        padding: 0 !important;
+    }
+    .profile-dropdown{
+        width: 230px;
+        .profile-details {
+            .name {
+
+            }
+            .role {
+
+            }
+            padding-top: 15px;
+            img {
+                border-radius: 1000px;
+            }
+            align-items: center;
+            color: white;
+            flex-direction: column;
+            background: linear-gradient(45deg, rgba(56, 88, 249, 0.9), rgba(142, 121, 253, 0.9)), url(../../../assets/images/info-header.jpg);
+        }
+    }
+}
+.breadcrumb-header {
+    .expenses {
+        fa-icon {
+            font-size: 35px; 
+            color: #ffc107;
+        }
+    }
+    .profit {
+        fa-icon {
+            font-size: 35px; 
+            color: #28a745;
+        }
+    }
+    color: white;
+    .content-title {
+        color: #ffb500;
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+}

@@ -1,0 +1,14 @@
+.main-container:after {
+    background-image: url(../assets/images/inner-topbar.jpg);
+    content: "";
+    height: 220px;
+    background-position: left center;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+

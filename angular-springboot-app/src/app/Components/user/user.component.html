@@ -1,36 +1,39 @@
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#EditAddUser" (click)="openModel()" style="margin: 50px;">Create New User</button>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Role Name</th>
-      <th scope="col" colspan="2">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of userList" >
-      <th scope="row">{{user.id}}</th>
-      <td>{{user.userName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.role.roleName}}</td>
-      <td>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditAddUser" (click)="openModel(user)">Edit</button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#EditAddUser" (click)="openModel()" style="margin: 50px;">Create New User</button>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Role Name</th>
+        <th scope="col" colspan="2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userList" >
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.userName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.role.roleName}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditAddUser" (click)="openModel(user)">Edit</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="EditAddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Role</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -53,10 +56,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" *ngIf="creatingMode" (click)="CreateUser()">Create User</button>
         <button type="button" class="btn btn-primary" *ngIf="!creatingMode" (click)="modifyUser()">Modify User</button>
       </div>
     </div>
   </div>
 </div>
+
+
