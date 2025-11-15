@@ -1,12 +1,12 @@
 package com.springboot.demo.services;
 
 
-import java.util.List;
+import com.springboot.demo.entities.Role;
+import com.springboot.demo.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springboot.demo.entities.Role;
-import com.springboot.demo.repositories.RoleRepository;
+import java.util.List;
 
 @Service
 public class RoleService {

@@ -1,0 +1,32 @@
+gradlew clean build -x test --refresh-dependencies
+
+gradlew bootrun
+
+#creating jar
+gradlew clean bootJar
+Output: build/libs/jwt-mongo-app.jar
+
+#hotbuild
+gradlew bootrun --continuous
+
+#to run app in debug mode
+./gradlew bootRun --debug-jvm
+
+#in SecurityConfig we have configuration to allow register url without authentication
+
+#this run a jar
+java -jar build/libs/your-app-name-0.0.1-SNAPSHOT.jar
+
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 \
+     -jar build/libs/your-app-name-0.0.1-SNAPSHOT.jar
+
+
+#@EnableWebSecurity
+ @EnableMethodSecurity -- to enable method level annotation security
+
+while enabling role based auth ROLE_ is not required.
+@PreAuthorize("hasRole('ADMIN')") -- method level role based authentication
+
+role verification is added as claims while generating and validating tokens
+
+CorsConfig.java added to configure the CORS settings.

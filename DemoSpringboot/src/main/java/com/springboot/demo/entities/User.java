@@ -1,9 +1,11 @@
 package com.springboot.demo.entities;
 
-import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Document(collection = "Users")
 public class User implements Serializable {
@@ -13,6 +15,45 @@ public class User implements Serializable {
 	private String lastName;
 	@DBRef
     private Role role;
+
+	@DBRef
+	private ProfileData profileData;
+
+	private List<String> roles;
+
+	private String email;
+	private String password;
+
+	private  String phone;
+
+	private String createdAt;
+
+	private String updatedAt;
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -36,5 +77,36 @@ public class User implements Serializable {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	public ProfileData getProfileData() {
+		return profileData;
+	}
+
+	public void setProfileData(ProfileData profileData) {
+		this.profileData = profileData;
 	}
 }

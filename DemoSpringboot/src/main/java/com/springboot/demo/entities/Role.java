@@ -1,8 +1,9 @@
 package com.springboot.demo.entities;
 
-import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
 
 @Document(collection = "Roles")
 public class Role implements Serializable{
