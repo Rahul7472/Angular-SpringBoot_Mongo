@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -57,14 +58,15 @@ public class AuthController {
             return ResponseEntity.ok(Map.of("error", "Invalid username or password"));
         }
 
-        UserDetails userDetails = userRepository.findByUserName(user.getUserName())
+        Optional<User> userFromRepo =userRepository.findByUserName(user.getUserName());
+        UserDetails userDetails = userFromRepo
                 .map(u -> org.springframework.security.core.userdetails.User
                         .withUsername(u.getUserName())
                         .password(u.getPassword())
                         .roles(u.getRoles().toArray(new String[0]))
                         .build())
                 .orElseThrow();
-        return ResponseEntity.ok(Map.of("token", jwtService.generateToken(userDetails)));
-        //return new ResponseEntity<String>(jwtService.generateToken(userDetails), HttpStatus.OK);
+        String tenantId = userFromRepo.map(User::getTenantId).orElse(null);
+        return ResponseEntity.ok(Map.of("token", jwtService.generateToken(userDetails, tenantId)));
     }
 }

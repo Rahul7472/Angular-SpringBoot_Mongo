@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,7 +11,9 @@ export class DataService {
 
 
    // Inject ApiUrl in constructor to Get it form ather Service
-   constructor(@Inject(String) private APIUrl: string,private http: HttpClient) { }
+   constructor(@Inject(String) private APIUrl: string,
+                private http: HttpClient,
+                private authService: AuthService) { }
 
 
   // Get Method

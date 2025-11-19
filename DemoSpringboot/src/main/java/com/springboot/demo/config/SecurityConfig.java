@@ -2,6 +2,7 @@ package com.springboot.demo.config;
 
 
 import com.springboot.demo.filters.JwtAuthFilter;
+import com.springboot.demo.filters.TenantFilter;
 import com.springboot.demo.services.impl.CustomUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,13 +21,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
     private final JwtAuthFilter jwtAuthFilter;
+    private final TenantFilter tenantFilter;
     private final CustomUserDetailsServiceImpl userDetailsService;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter, CustomUserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(TenantFilter tenantFilter, JwtAuthFilter jwtAuthFilter, CustomUserDetailsServiceImpl userDetailsService) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.userDetailsService = userDetailsService;
+        this.tenantFilter = tenantFilter;
     }
 
     @Bean
@@ -57,9 +59,9 @@ public class SecurityConfig {
                         .requestMatchers("/user/**").hasAnyRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
+                .authenticationProvider(authenticationProvider());
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAfter(tenantFilter, JwtAuthFilter.class);
         return http.build();
     }
 }

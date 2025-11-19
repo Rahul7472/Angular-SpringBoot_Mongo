@@ -5,6 +5,7 @@ import { UserService } from '../../Services/user.service';
 import { RoleService } from '../../Services/role.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -23,12 +24,16 @@ export class UserComponent {
 
 
   constructor(private userService : UserService,
-              private roleService : RoleService){
+              private roleService : RoleService)
+              {
     this.getAllUsers();
     this.getAllRoles();
   }
+
+
   //Get All Users
   getAllUsers(){
+    
     this.userService.getAll().subscribe((response : User[])=>{
       this.userList = response;
     });

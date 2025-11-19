@@ -30,3 +30,8 @@ while enabling role based auth ROLE_ is not required.
 role verification is added as claims while generating and validating tokens
 
 CorsConfig.java added to configure the CORS settings.
+
+TenantMongoEventListener -- will be called on save, insert or saveall
+
+similar to roles tenantId will be fetched from token as claims and will also be set to token at the
+time of token generation

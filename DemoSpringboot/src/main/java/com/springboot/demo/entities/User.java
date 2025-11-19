@@ -1,5 +1,6 @@
 package com.springboot.demo.entities;
 
+import com.springboot.demo.entities.models.TenantAware;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Document(collection = "Users")
-public class User implements Serializable {
+public class User implements Serializable, TenantAware {
 	@Id
 	private String id;
 	private String userName;
@@ -20,7 +21,6 @@ public class User implements Serializable {
 	private ProfileData profileData;
 
 	private List<String> roles;
-
 	private String email;
 	private String password;
 
@@ -29,6 +29,20 @@ public class User implements Serializable {
 	private String createdAt;
 
 	private String updatedAt;
+
+	private UserType userType;
+
+	private String tenantId;
+
+	@Override
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
 
 	public String getPhone() {
 		return phone;
@@ -109,4 +123,18 @@ public class User implements Serializable {
 	public void setProfileData(ProfileData profileData) {
 		this.profileData = profileData;
 	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
+}
+
+enum UserType {
+	AGENT,
+	ADMIN,
+	MANAGER
 }

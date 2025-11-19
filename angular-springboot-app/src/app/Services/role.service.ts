@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 const  APIUrlRole ="http://localhost:8080/role";
 
@@ -8,7 +9,8 @@ const  APIUrlRole ="http://localhost:8080/role";
   providedIn: 'root'
 })
 export class RoleService extends DataService{
-  constructor(http:HttpClient){
-    super(APIUrlRole,http);
+  constructor(http:HttpClient,
+              authService: AuthService){
+    super(APIUrlRole,http, authService);
   }
 }

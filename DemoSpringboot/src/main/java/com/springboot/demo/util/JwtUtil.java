@@ -4,6 +4,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -17,24 +20,37 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 @Component
 public class JwtUtil {
-    private final String SECRET_KEY = "supersecretkeyforjwtauthentication12345supersecretkeyforjwtauthentication12345";
-    private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
+
+    @Value("${jwt.secret}")
+    private String secret;
+
+    @Value("${jwt.expiration}")
+    private long expiration;
+
+    @Value("${jwt.enableMultiTenancy}")
+    private boolean isMultiTenancyEnabled;
 
 
-    private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes());
+    }
 
-    public String generateToken(UserDetails userDetails) {
+
+    public String generateToken(UserDetails userDetails, String tenantId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", userDetails.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
+        if(StringUtils.isNotEmpty(tenantId) && BooleanUtils.isTrue(isMultiTenancyEnabled)) {
+            claims.put("tenantId", tenantId);
+        }
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS256, key)
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(SignatureAlgorithm.HS256, getSigningKey())
                 .compact();
     }
 
@@ -46,6 +62,11 @@ public class JwtUtil {
     public List<String> extractRoles(String token) {
         Claims claims = extractAllClaims(token);
         return claims.get("roles", List.class);
+    }
+
+    public String extractTenantId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("tenantId", String.class);
     }
 
     // ✅ Extract expiration date
@@ -62,7 +83,7 @@ public class JwtUtil {
     // ✅ Extract all claims
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();

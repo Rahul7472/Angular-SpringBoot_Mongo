@@ -1,10 +1,11 @@
 package com.springboot.demo.entities;
 
+import com.springboot.demo.entities.models.TenantAware;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Profiles")
-public class ProfileData {
+public class ProfileData implements TenantAware {
     @Id
     String profileId;
     String photoUrl;
@@ -32,5 +33,17 @@ public class ProfileData {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    private String tenantId;
+
+    @Override
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    @Override
+    public String getTenantId() {
+        return tenantId;
     }
 }
